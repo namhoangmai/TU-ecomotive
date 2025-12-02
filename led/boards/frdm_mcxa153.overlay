@@ -1,0 +1,35 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ * Device tree overlay for external LED on breadboard
+ */
+
+/ {
+	leds {
+		compatible = "gpio-leds";
+		
+		/* External LED connected to breadboard */
+		external_led: external_led_0 {
+			/* 
+			 * Configure your GPIO pin here
+			 * Example formats:
+			 * - &gpio0 5 GPIO_ACTIVE_HIGH    (GPIO port 0, pin 5, active high)
+			 * - &gpio1 2 GPIO_ACTIVE_LOW     (GPIO port 1, pin 2, active low)
+			 * 
+			 * Common pins on FRDM-MCXA153:
+			 * - P0_4 (Arduino D2)  = &gpio0 4 GPIO_ACTIVE_HIGH
+			 * - P0_5 (Arduino D3)  = &gpio0 5 GPIO_ACTIVE_HIGH
+			 * - P1_0 (Arduino D4)  = &gpio1 0 GPIO_ACTIVE_HIGH
+			 * - P1_1 (Arduino D5)  = &gpio1 1 GPIO_ACTIVE_HIGH
+			 * - P1_8 (Arduino D8)  = &gpio1 8 GPIO_ACTIVE_HIGH
+			 * - P1_9 (Arduino D9)  = &gpio1 9 GPIO_ACTIVE_HIGH
+			 */
+			gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+			label = "External LED";
+		};
+	};
+
+	aliases {
+		/* Override led0 to use the external LED */
+		led0 = &external_led;
+	};
+};
